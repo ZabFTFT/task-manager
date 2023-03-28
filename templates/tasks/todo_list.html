@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>there is list of To Do task on project:</h1>
+  {% for task in todo_list %}
+    <li>{{ task.name }}</li>
+  {% endfor %}
+{% endblock %}

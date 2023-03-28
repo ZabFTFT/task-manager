@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
@@ -43,4 +44,4 @@ class Task(models.Model):
     is_completed = models.BooleanField()
     priority = models.CharField(max_length=1, choices=task_priority)
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
-    assignees = models.ManyToManyField(Worker)
+    assignees = models.ManyToManyField(settings.AUTH_USER_MODEL)

@@ -3,13 +3,13 @@
     <li class="list-group-item">User: <a href="#">{{ user.get_username }}</a></li>
     <li class="list-group-item"><a href="#">Logout</a></li>
   {% else %}
-    <li class="list-group-item"><a href="#">Login</a></li>
+    <li class="list-group-item"><a href="{% url 'login' %}">Login</a></li>
   {% endif %}
 
   <br>
 
-  <li class="list-group-item"><a href="#">Home</a></li>
-  <li class="list-group-item"><a href="#">All drivers</a></li>
-  <li class="list-group-item"><a href="#">All cars</a></li>
-  <li class="list-group-item"><a href="#">All manufacturers</a></li>
+  <li class="list-group-item"><a href="#">My Tasks</a></li>
+  <li class="list-group-item"><a href="#">To Do</a></li>
+  <li class="list-group-item"><a href="#">In progress</a></li>
+  <li class="list-group-item"><a href="#">Expired/Canceled</a></li>
 </ul>

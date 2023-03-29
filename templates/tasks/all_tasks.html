@@ -5,12 +5,13 @@
   <div class="row">
     <div class="col-md-4">
       <h3>To do</h3>
-
+      <button name="priority">
       <table class="table">
         <thead>
           <tr>
             <th>Task ID</th>
             <th>Task name</th>
+            <th>Task type</th>
             <th>Task deadline</th>
             <th>Priority</th>
           </tr>
@@ -20,6 +21,7 @@
             <tr>
               <td><a href="{% url 'tasks:project-task' task.id %}">{{ task.id }}</a></td>
               <td>{{ task.name }}</td>
+              <td>{{ task.task_type}}</td>
               <td>{{ task.deadline }}</td>
               <td>{{ task.priority }}</td>
               <td><a href="{% url 'tasks:task-delete' task.id%}">Delete</a></td>
@@ -28,54 +30,7 @@
         </tbody>
       </table>
     </div>
-  <div class="col-md-4">
-      <h3>In progress</h3>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Task ID</th>
-            <th>Task name</th>
-            <th>Task deadline</th>
-            <th>Priority</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for task in in_progress_list %}
-            <tr>
-              <td><a href="{% url 'tasks:project-task' task.id %}">{{ task.id }}</a></td>
-              <td>{{ task.name }}</td>
-              <td>{{ task.deadline }}</td>
-              <td>{{ task.priority }}</td>
-              <td><a href="{% url 'tasks:task-delete' task.id%}">Delete</a></td>
-
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-    <div class="col-md-4">
-      <h3>Finished</h3>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Task ID</th>
-            <th>Task name</th>
-            <th>Task completed time</th>
-            <th>Priority</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for task in completed_list %}
-            <tr>
-              <td><a href="{% url 'tasks:project-task' task.id %}">{{ task.id }}</a></td>
-              <td>{{ task.name }}</td>
-              <td>{{ task.completed_time }}</td>
-              <td>{{ task.priority }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
+{#   #}
   </div>
 
 

@@ -1,6 +1,9 @@
+import datetime
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils import timezone
 
 
 class Position(models.Model):
@@ -27,7 +30,7 @@ class Worker(AbstractUser):
         default_related_name = "workers"
 
     def __str__(self):
-        return f"{self.username} {self.first_name} {self.last_name}"
+        return f"{self.first_name} {self.last_name} {self.position}"
 
 
 class Task(models.Model):
@@ -51,3 +54,11 @@ class Task(models.Model):
     class Meta:
         default_related_name = "tasks"
         ordering = ["deadline"]
+
+    def clean(self, *args, **kwargs):
+        # run the base validation
+        super().clean(*args, **kwargs)
+        now = timezone.now()
+        # Don't allow dates older than now.
+        if self.deadline < now:
+            raise ValidationError('Deadline date must be later than now.')

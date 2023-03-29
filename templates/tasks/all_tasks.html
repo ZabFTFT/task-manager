@@ -4,8 +4,18 @@
   <h1>Project tasks</h1>
   <div class="row">
     <div class="col-md-4">
-      <h3>To do</h3>
-      <button name="priority">
+      <h3>Filter tasks</h3>
+      <form method="get">
+        {% for field in filter.form.visible_fields %}
+          <div class="form-group">
+            {{ field.label_tag }} {{ field }}
+          </div>
+        {% endfor %}
+        <button class="btn btn-primary" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="col-md-8">
+      <h3>Tasks</h3>
       <table class="table">
         <thead>
           <tr>
@@ -17,11 +27,11 @@
           </tr>
         </thead>
         <tbody>
-          {% for task in to_do_list %}
+          {% for task in tasks_filter %}
             <tr>
               <td><a href="{% url 'tasks:project-task' task.id %}">{{ task.id }}</a></td>
               <td>{{ task.name }}</td>
-              <td>{{ task.task_type}}</td>
+              <td>{{ task.task_type }}</td>
               <td>{{ task.deadline }}</td>
               <td>{{ task.priority }}</td>
               <td><a href="{% url 'tasks:task-delete' task.id%}">Delete</a></td>
@@ -30,8 +40,5 @@
         </tbody>
       </table>
     </div>
-{#   #}
   </div>
-
-
 {% endblock %}

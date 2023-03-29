@@ -1,12 +1,11 @@
 import datetime
 
-from django.contrib.auth import get_user_model
-from django.db.models import Q
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
+from tasks.filters import OrderFilter
 from tasks.forms import CreateTaskForm, CreateWorkerForm
 from tasks.models import Task
 
@@ -26,18 +25,15 @@ def index(request: HttpRequest) -> HttpResponse:
 class ProjectTasksList(generic.ListView):
     model = Task
     template_name = "tasks/all_tasks.html"
-    context_object_name = "project_tasks_list"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        to_do_tasks = Task.objects.filter(in_progress=False,
-                                          is_completed=False)
-        in_progress_tasks = Task.objects.filter(in_progress=True,
-                                                is_completed=False)
-        completed_tasks = Task.objects.filter(is_completed=True)
-        context["to_do_list"] = to_do_tasks
-        context["in_progress_list"] = in_progress_tasks
-        context["completed_list"] = completed_tasks
+        tasks = Task.objects.filter(is_completed=False)
+        myFilter = OrderFilter(self.request.GET, queryset=tasks)
+        tasks_filter = myFilter.qs
+        context["filter"] = myFilter
+        context["tasks"] = tasks
+        context["tasks_filter"] = tasks_filter
         return context
 
 
@@ -51,8 +47,6 @@ class DeleteTaskView(generic.DeleteView):
     model = Task
     template_name = "tasks/task_delete_confirm.html"
     success_url = reverse_lazy("tasks:project-tasks-list")
-
-
 
 
 class ProjectTaskDetailView(generic.DetailView):

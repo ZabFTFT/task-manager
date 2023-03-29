@@ -47,6 +47,14 @@ class CreateTaskView(generic.CreateView):
     success_url = reverse_lazy("tasks:project-tasks-list")
 
 
+class DeleteTaskView(generic.DeleteView):
+    model = Task
+    template_name = "tasks/task_delete_confirm.html"
+    success_url = reverse_lazy("tasks:project-tasks-list")
+
+
+
+
 class ProjectTaskDetailView(generic.DetailView):
     model = Task
     template_name = "tasks/project_task.html"

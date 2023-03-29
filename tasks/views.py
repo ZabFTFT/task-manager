@@ -22,11 +22,22 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, "tasks/index.html", context=context)
 
 
-class ToDoList(generic.ListView):
+class ProjectTasksList(generic.ListView):
     model = Task
-    queryset = Task.objects.filter(is_completed=False, in_progress=False)
-    template_name = "tasks/todo_list.html"
-    context_object_name = "todo_list"
+    template_name = "tasks/all_tasks.html"
+    context_object_name = "project_tasks_list"
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        to_do_tasks = Task.objects.filter(in_progress=False,
+                                          is_completed=False)
+        in_progress_tasks = Task.objects.filter(in_progress=True,
+                                                is_completed=False)
+        completed_tasks = Task.objects.filter(is_completed=True)
+        context["to_do_list"] = to_do_tasks
+        context["in_progress_list"] = in_progress_tasks
+        context["completed_list"] = completed_tasks
+        return context
 
 
 class CreateTaskView(generic.CreateView):
@@ -34,22 +45,13 @@ class CreateTaskView(generic.CreateView):
     template_name = "tasks/create_task.html"
 
 
-class WorkerDetailView(generic.DetailView):
-    model = get_user_model()
-    template_name = "tasks/profile_page.html"
-    context_object_name = "profile_list"
-    queryset = get_user_model().objects.filter()
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        to_do_tasks = Task.objects.filter(assignees__in=[kwargs["object"]], in_progress=False)
-        in_progress_tasks = Task.objects.filter(assignees__in=[kwargs["object"]], in_progress=True)
-        context["to_do_tasks"] = to_do_tasks
-        context["in_progress_tasks"] = in_progress_tasks
-        return context
+class ProjectTaskDetailView(generic.DetailView):
+    model = Task
+    template_name = "tasks/project_task.html"
+    context_object_name = "project_task"
 
 
-def task_list(request, pk):
+def personal_task_list(request, pk):
     to_do_tasks = Task.objects.filter(in_progress=False, assignees__in=[pk], is_completed=False)
     in_progress_tasks = Task.objects.filter(in_progress=True, assignees__in=[pk], is_completed=False)
     completed_tasks = Task.objects.filter(is_completed=True)

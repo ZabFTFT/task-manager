@@ -97,7 +97,7 @@ DATABASES = {
 }
 
 
-# Password validation
+# Password validationp
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -133,8 +133,12 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
+    BASE_DIR / "static/css",
 ]
 
 # Default primary key field type

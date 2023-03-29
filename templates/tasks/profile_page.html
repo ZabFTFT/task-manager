@@ -28,6 +28,7 @@
         {% endfor %}
     </table>
   {% endif %}
+  {% if in_progress_tasks %}
   <h1>In progress</h1>
     <table class="table">
       <tr>
@@ -53,6 +54,8 @@
         </tr>
         {% endfor %}
     </table>
+  {% endif %}
+  {% if completed_tasks %}
    <h1>Finished</h1>
     <table class="table">
       <tr>
@@ -73,4 +76,5 @@
         </tr>
         {% endfor %}
     </table>
+  {% endif %}
 {% endblock %}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>All tasks</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <h3>To do</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Task ID</th>
+            <th>Task name</th>
+            <th>Task deadline</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for task in to_do_list %}
+            <tr>
+              <td><a href="{% url 'tasks:project-task' task.id %}">{{ task.id }}</a></td>
+              <td>{{ task.name }}</td>
+              <td>{{ task.deadline }}</td>
+              <td>{{ task.priority }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  <div class="col-md-6">
+      <h3>In progress</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Task ID</th>
+            <th>Task name</th>
+            <th>Task deadline</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for task in in_progress_list %}
+            <tr>
+              <td><a href="{% url 'tasks:project-task' task.id %}">{{ task.id }}</a></td>
+              <td>{{ task.name }}</td>
+              <td>{{ task.deadline }}</td>
+              <td>{{ task.priority }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      <h3>Finished</h3>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Task ID</th>
+            <th>Task name</th>
+            <th>Task deadline</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for task in completed_list %}
+            <tr>
+              <td><a href="{% url 'tasks:project-task' task.id %}">{{ task.id }}</a></td>
+              <td>{{ task.name }}</td>
+              <td>{{ task.deadline }}</td>
+              <td>{{ task.priority }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+{% endblock %}

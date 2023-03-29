@@ -42,7 +42,11 @@ class Task(models.Model):
     description = models.TextField()
     deadline = models.DateTimeField()
     is_completed = models.BooleanField(default=False)
+    completed_time = models.DateTimeField(null=True, default=None)
     in_progress = models.BooleanField(default=False)
     priority = models.CharField(max_length=1, choices=task_priority)
     task_type = models.ForeignKey(TaskType, on_delete=models.CASCADE)
     assignees = models.ManyToManyField(settings.AUTH_USER_MODEL)
+
+    class Meta:
+        default_related_name = "tasks"

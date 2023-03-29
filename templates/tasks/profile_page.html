@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if to_do_tasks %}
+  <h1>To do</h1>
+    <table class="table">
+      <tr>
+        <th>Task name</th>
+        <th>Task description</th>
+        <th>Task deadline</th>
+        <th>Priority</th>
+      </tr>
+
+      {% for task in to_do_tasks %}
+        <tr>
+          <td>{{ task.name }}</td>
+          <td>{{ task.description }}</td>
+          <td>{{ task.deadline }}</td>
+          <td>{{ task.priority }}</td>
+          <td>
+            <form method="post">
+              {% csrf_token %}
+              <input type="hidden" name="task_id" value="{{ task.id }}">
+              <button type="submit">Start doing</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+    </table>
+  {% endif %}
+  <h1>In progress</h1>
+    <table class="table">
+      <tr>
+        <th>Task name</th>
+        <th>Task description</th>
+        <th>Task deadline</th>
+        <th>Priority</th>
+      </tr>
+
+      {% for task in in_progress_tasks %}
+        <tr>
+          <td>{{ task.name }}</td>
+          <td>{{ task.description }}</td>
+          <td>{{ task.deadline }}</td>
+          <td>{{ task.priority }}</td>
+          <td>
+            <form method="post">
+              {% csrf_token %}
+              <input type="hidden" name="task_id_done" value="{{ task.id }}">
+              <button type="submit">Done</button>
+            </form>
+          </td>
+        </tr>
+        {% endfor %}
+    </table>
+   <h1>Finished</h1>
+    <table class="table">
+      <tr>
+        <th>Task name</th>
+        <th>Task description</th>
+        <th>Task deadline</th>
+        <th>Priority</th>
+        <th>Finished</th>
+      </tr>
+
+      {% for task in completed_tasks %}
+        <tr>
+          <td>{{ task.name }}</td>
+          <td>{{ task.description }}</td>
+          <td>{{ task.deadline }}</td>
+          <td>{{ task.priority }}</td>
+          <td>{{ task.completed_time}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

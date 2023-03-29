@@ -25,7 +25,7 @@ def index(request: HttpRequest) -> HttpResponse:
 
 class ProjectTaskListView(generic.ListView):
     model = Task
-    template_name = "tasks/all_tasks.html"
+    template_name = "tasks/project_task_all.html"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -37,9 +37,10 @@ class ProjectTaskListView(generic.ListView):
         context["tasks_filter"] = project_tasks_filter_qs
         return context
 
+
 class ProjectTaskListFinishedView(generic.ListView):
     model = Task
-    template_name = "tasks/project_tasks_finished.html"
+    template_name = "tasks/project_task_finished.html"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -50,19 +51,19 @@ class ProjectTaskListFinishedView(generic.ListView):
         return context
 class CreateTaskView(generic.CreateView):
     form_class = CreateTaskForm
-    template_name = "tasks/create_task.html"
+    template_name = "tasks/create_project_task.html"
     success_url = reverse_lazy("tasks:project-tasks-list")
 
 
 class DeleteTaskView(generic.DeleteView):
     model = Task
-    template_name = "tasks/task_delete_confirm.html"
+    template_name = "tasks/project_task_delete_confirm.html"
     success_url = reverse_lazy("tasks:project-tasks-list")
 
 
 class ProjectTaskDetailView(generic.DetailView):
     model = Task
-    template_name = "tasks/project_task.html"
+    template_name = "tasks/project_task_detail.html"
     context_object_name = "project_task"
 
 

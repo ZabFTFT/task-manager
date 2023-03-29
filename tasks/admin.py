@@ -32,11 +32,11 @@ class TaskAdmin(admin.ModelAdmin):
         "name",
         "description",
         "deadline",
-        "is_completed",
         "priority",
         "task_type",
+        "in_progress",
+        "is_completed",
     ]
-
 
 
 admin.site.register(Position)

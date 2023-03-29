@@ -7,7 +7,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from tasks.forms import CreateTaskForm
+from tasks.forms import CreateTaskForm, CreateWorkerForm
 from tasks.models import Task
 
 
@@ -51,6 +51,12 @@ class ProjectTaskDetailView(generic.DetailView):
     model = Task
     template_name = "tasks/project_task.html"
     context_object_name = "project_task"
+
+
+class CreateWorkerView(generic.CreateView):
+    form_class = CreateWorkerForm
+    template_name = "tasks/create_worker.html"
+    success_url = reverse_lazy("tasks:worker-create")
 
 
 def personal_task_list(request, pk):

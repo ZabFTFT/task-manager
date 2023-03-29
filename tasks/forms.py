@@ -1,8 +1,9 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
 from django.forms.widgets import DateTimeInput
 
-from tasks.models import Task
+from tasks.models import Task, Worker
 
 
 class CreateTaskForm(forms.ModelForm):
@@ -20,3 +21,14 @@ class CreateTaskForm(forms.ModelForm):
                 "type": "datetime-local"
             })
         }
+
+
+class CreateWorkerForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+        model = Worker
+        fields = UserCreationForm.Meta.fields + (
+            "first_name",
+            "last_name",
+            "email",
+            "position",
+        )

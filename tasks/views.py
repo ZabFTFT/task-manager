@@ -4,6 +4,7 @@ from django.contrib.auth import get_user_model
 from django.db.models import Q
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
 
 from tasks.forms import CreateTaskForm
@@ -43,6 +44,7 @@ class ProjectTasksList(generic.ListView):
 class CreateTaskView(generic.CreateView):
     form_class = CreateTaskForm
     template_name = "tasks/create_task.html"
+    success_url = reverse_lazy("tasks:project-tasks-list")
 
 
 class ProjectTaskDetailView(generic.DetailView):

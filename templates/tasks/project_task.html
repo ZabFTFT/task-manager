@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <h3 class="my-4">{{ project_task.name }}</h3>
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <th scope="row">Task ID</th>
+              <td>{{ project_task.id }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Task name</th>
+              <td>{{ project_task.name }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Task description</th>
+              <td>{{ project_task.description }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Task deadline</th>
+              <td>{{ project_task.deadline }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Priority</th>
+              <td>{{ project_task.priority }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Participants</th>
+              <td>{{ project_task.assignees.all }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row justify-content-center">
+          <a href="{% url 'tasks:project-tasks-list' %}" class="btn btn-primary">Back to tasks list</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -10,8 +10,9 @@
 
   <li class="list-group-item"><a href="{% url 'tasks:worker-create' %}">Create Worker</a></li>
   <li class="list-group-item"><a href="{% url 'tasks:create-task' %}">Create Task</a></li>
-  <li class="list-group-item"><a href="#">My Tasks</a></li>
-  <li class="list-group-item"><a href="{% url 'tasks:project-tasks-list' %}">Project Tasks</a></li>
+  <li class="list-group-item"><a href="{% url 'tasks:profile-page' user.id %}">My Tasks</a></li>
+  <li class="list-group-item"><a href="{% url 'tasks:project-tasks-list' %}">Project Active Tasks</a></li>
+  <li class="list-group-item"><a href="{% url 'tasks:project-tasks-finished' %}">Project Finished Tasks</a></li>
 {#  <li class="list-group-item"><a href="#">In progress</a></li>#}
 {#  <li class="list-group-item"><a href="#">Expired/Canceled</a></li>#}
 </ul>

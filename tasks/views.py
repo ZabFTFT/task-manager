@@ -1,5 +1,6 @@
 import datetime
 
+from django.contrib.auth import get_user_model
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -22,21 +23,31 @@ def index(request: HttpRequest) -> HttpResponse:
     return render(request, "tasks/index.html", context=context)
 
 
-class ProjectTasksList(generic.ListView):
+class ProjectTaskListView(generic.ListView):
     model = Task
     template_name = "tasks/all_tasks.html"
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        tasks = Task.objects.filter(is_completed=False)
-        myFilter = OrderFilter(self.request.GET, queryset=tasks)
-        tasks_filter = myFilter.qs
-        context["filter"] = myFilter
-        context["tasks"] = tasks
-        context["tasks_filter"] = tasks_filter
+        tasks_not_completed = Task.objects.filter(is_completed=False)
+        project_tasks_filter = OrderFilter(self.request.GET, queryset=tasks_not_completed)
+        project_tasks_filter_qs = project_tasks_filter.qs
+        context["filter"] = project_tasks_filter
+        context["tasks"] = tasks_not_completed
+        context["tasks_filter"] = project_tasks_filter_qs
         return context
 
+class ProjectTaskListFinishedView(generic.ListView):
+    model = Task
+    template_name = "tasks/project_tasks_finished.html"
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        finished_tasks = Task.objects.filter(is_completed=True)
+        participants = get_user_model().objects.filter(tasks__in=finished_tasks).distinct()
+        context["finished_tasks"] = finished_tasks
+        context["participants"] = participants
+        return context
 class CreateTaskView(generic.CreateView):
     form_class = CreateTaskForm
     template_name = "tasks/create_task.html"

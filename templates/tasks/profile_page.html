@@ -3,13 +3,17 @@
 {% block content %}
   {% if to_do_tasks %}
   <h1>To do</h1>
-    <table class="table">
-      <tr>
-        <th>Task name</th>
-        <th>Task description</th>
-        <th>Task deadline</th>
-        <th>Priority</th>
-      </tr>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Task name</th>
+          <th>Task description</th>
+          <th>Task deadline</th>
+          <th>Priority</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
 
       {% for task in to_do_tasks %}
         <tr>
@@ -21,22 +25,29 @@
             <form method="post">
               {% csrf_token %}
               <input type="hidden" name="task_id" value="{{ task.id }}">
-              <button type="submit">Start doing</button>
+              <button type="submit" class="btn btn-primary">Start doing</button>
             </form>
           </td>
         </tr>
         {% endfor %}
+
+      </tbody>
     </table>
   {% endif %}
+
   {% if in_progress_tasks %}
   <h1>In progress</h1>
-    <table class="table">
-      <tr>
-        <th>Task name</th>
-        <th>Task description</th>
-        <th>Task deadline</th>
-        <th>Priority</th>
-      </tr>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Task name</th>
+          <th>Task description</th>
+          <th>Task deadline</th>
+          <th>Priority</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
 
       {% for task in in_progress_tasks %}
         <tr>
@@ -48,23 +59,29 @@
             <form method="post">
               {% csrf_token %}
               <input type="hidden" name="task_id_done" value="{{ task.id }}">
-              <button type="submit">Done</button>
+              <button type="submit" class="btn btn-success">Done</button>
             </form>
           </td>
         </tr>
         {% endfor %}
+
+      </tbody>
     </table>
   {% endif %}
+
   {% if completed_tasks %}
    <h1>Finished</h1>
-    <table class="table">
-      <tr>
-        <th>Task name</th>
-        <th>Task description</th>
-        <th>Task deadline</th>
-        <th>Priority</th>
-        <th>Finished</th>
-      </tr>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Task name</th>
+          <th>Task description</th>
+          <th>Task deadline</th>
+          <th>Priority</th>
+          <th>Finished</th>
+        </tr>
+      </thead>
+      <tbody>
 
       {% for task in completed_tasks %}
         <tr>
@@ -75,6 +92,8 @@
           <td>{{ task.completed_time}}</td>
         </tr>
         {% endfor %}
+
+      </tbody>
     </table>
   {% endif %}
 {% endblock %}

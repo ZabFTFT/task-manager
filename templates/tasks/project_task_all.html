@@ -41,7 +41,7 @@
                 <td class="text-center">{{ task.deadline }}</td>
                 <td class="text-center {% if task.priority == 'C' %}text-danger font-weight-bold{% elif task.priority == 'H' %}text-warning{% else %}text-secondary{% endif %}">
       {{ task.priority }}
-    </td>
+                </td>
                 <td>
                   <a href="{% url 'tasks:project-task-detail' task.id %}" class="btn btn-sm btn-secondary">Details</a>
                   <a href="{% url 'tasks:task-delete' task.id %}" class="btn btn-sm btn-danger">Delete</a>

@@ -17,7 +17,7 @@ from tasks.models import Task
 def index(request: HttpRequest) -> HttpResponse:
     num_task_all = Task.objects.count()
     num_task_in_progress = Task.objects.filter(in_progress=True).count()
-    num_task_finished = Task.objects.filter(is_completed=True).count
+    num_task_finished = Task.objects.filter(is_completed=True).count()
 
     context = {
         "num_task_all": num_task_all,

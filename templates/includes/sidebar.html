@@ -1,6 +1,6 @@
 <ul class="sidebar-nav list-group">
   {% if user.is_authenticated %}
-    <li class="list-group-item">User: <a href="{% url 'tasks:profile-page' user.id %} ">{{ user.get_username }}</a></li>
+    <li class="list-group-item">User: <a href="{% url 'tasks:my-tasks' user.id %} ">{{ user.get_username }}</a></li>
     <li class="list-group-item"><a href="#">Logout</a></li>
   {% else %}
     <li class="list-group-item"><a href="{% url 'login' %}">Login</a></li>
@@ -10,9 +10,7 @@
 
   <li class="list-group-item"><a href="{% url 'tasks:worker-create' %}">Create Worker</a></li>
   <li class="list-group-item"><a href="{% url 'tasks:create-task' %}">Create Task</a></li>
-  <li class="list-group-item"><a href="{% url 'tasks:profile-page' user.id %}">My Tasks</a></li>
+  <li class="list-group-item"><a href="{% url 'tasks:my-tasks' user.id %}">My Tasks</a></li>
   <li class="list-group-item"><a href="{% url 'tasks:project-tasks-list' %}">Project Active Tasks</a></li>
   <li class="list-group-item"><a href="{% url 'tasks:project-tasks-finished' %}">Project Finished Tasks</a></li>
-{#  <li class="list-group-item"><a href="#">In progress</a></li>#}
-{#  <li class="list-group-item"><a href="#">Expired/Canceled</a></li>#}
 </ul>

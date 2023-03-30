@@ -22,7 +22,7 @@
             <td>{{ task.priority }}</td>
             <td>{{ task.completed_time }}</td>
             <td>
-                {% for participant in participants %}
+                {% for participant in task.assignees.all %}
                   <div class="d-flex justify-content-between align-items-center mb-3">
                     <div class="me-3">
                       <h5 class="mb-0">{{ participant.first_name }} {{ participant.last_name }}</h5>

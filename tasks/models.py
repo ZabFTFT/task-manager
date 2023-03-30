@@ -26,9 +26,6 @@ class TaskType(models.Model):
 class Worker(AbstractUser):
     position = models.ForeignKey(Position, on_delete=models.CASCADE)
 
-    class Meta:
-        default_related_name = "workers"
-
     def __str__(self):
         return f"{self.first_name} {self.last_name} {self.position}"
 
@@ -61,4 +58,4 @@ class Task(models.Model):
         now = timezone.now()
         # Don't allow dates older than now.
         if self.deadline < now:
-            raise ValidationError('Deadline date must be later than now.')
+            raise ValidationError("Deadline date must be later than now.")

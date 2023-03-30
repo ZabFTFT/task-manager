@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     "tasks",
     "debug_toolbar",
     "crispy_forms",
-    "crispy_bootstrap4"
+    "crispy_bootstrap4",
 ]
 
 MIDDLEWARE = [
@@ -58,7 +58,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-
 ]
 
 ROOT_URLCONF = "task_manager.urls"
@@ -138,7 +137,6 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    BASE_DIR / "static/css",
 ]
 
 # Default primary key field type

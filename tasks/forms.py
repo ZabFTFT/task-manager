@@ -16,24 +16,23 @@ class CreateTaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        fields = ["name", "description", "deadline", "priority", "task_type", "assignees"]
-        widgets = {
-            "deadline": DateTimeInput(attrs={
-                "type": "datetime-local"
-            })
-        }
+        fields = [
+            "name",
+            "description",
+            "deadline",
+            "priority",
+            "task_type",
+            "assignees",
+        ]
+        widgets = {"deadline": DateTimeInput(attrs={"type": "datetime-local"})}
 
 
 class CreateWorkerForm(UserCreationForm):
     first_name = forms.CharField(
-        max_length=255,
-        required=True,
-        label="First name"
+        max_length=255, required=True, label="First name"
     )
     last_name = forms.CharField(
-        max_length=255,
-        required=True,
-        label="Last name"
+        max_length=255, required=True, label="Last name"
     )
 
     class Meta(UserCreationForm.Meta):

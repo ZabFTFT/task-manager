@@ -17,7 +17,7 @@
 
       {% for task in to_do_tasks %}
         <tr>
-          <td>{{ task.name }}</td>
+          <td><a href="{% url 'tasks:project-task' task.id %}">{{ task.name }}</a></td>
           <td>{{ task.description }}</td>
           <td>{{ task.deadline }}</td>
           <td>{{ task.priority }}</td>

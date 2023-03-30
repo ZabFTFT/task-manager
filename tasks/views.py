@@ -34,7 +34,9 @@ class ProjectTaskListView(LoginRequiredMixin, generic.ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        tasks_not_completed = Task.objects.filter(is_completed=False)
+        tasks_not_completed = Task.objects.select_related("task_type").filter(
+            is_completed=False
+        )
         project_tasks_filter = OrderFilter(
             self.request.GET, queryset=tasks_not_completed
         )

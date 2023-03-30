@@ -24,7 +24,9 @@ class OrderFilter(django_filters.FilterSet):
         label="Deadline date",
     )
     assignees = ModelMultipleChoiceFilter(
-        queryset=get_user_model().objects.filter(~Q(first_name="")),
+        queryset=get_user_model()
+        .objects.select_related("position")
+        .filter(~Q(first_name="")),
         widget=forms.CheckboxSelectMultiple(),
         label="Participants",
     )

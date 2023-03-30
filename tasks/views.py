@@ -3,6 +3,7 @@ import datetime
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -16,10 +17,12 @@ from tasks.models import Task
 def index(request: HttpRequest) -> HttpResponse:
     num_task_all = Task.objects.count()
     num_task_in_progress = Task.objects.filter(in_progress=True).count()
+    num_task_finished = Task.objects.filter(is_completed=True).count
 
     context = {
         "num_task_all": num_task_all,
         "num_task_in_progress": num_task_in_progress,
+        "num_task_finished": num_task_finished,
     }
 
     return render(request, "tasks/index.html", context=context)
@@ -81,13 +84,13 @@ class ProjectTaskDetailView(LoginRequiredMixin, generic.DetailView):
 class CreateWorkerView(LoginRequiredMixin, generic.CreateView):
     form_class = CreateWorkerForm
     template_name = "tasks/create_worker.html"
-    success_url = reverse_lazy("tasks:worker-create")
+    success_url = reverse_lazy("login")
 
 
 def personal_task_list(request, pk):
     to_do_tasks = Task.objects.filter(in_progress=False, assignees__in=[pk], is_completed=False)
     in_progress_tasks = Task.objects.filter(in_progress=True, assignees__in=[pk], is_completed=False)
-    completed_tasks = Task.objects.filter(is_completed=True)
+    completed_tasks = Task.objects.filter(is_completed=True, assignees__in=[pk])
 
     if request.method == 'POST':
         if request.POST.get("task_id_done"):

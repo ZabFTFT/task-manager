@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base-fullscreen.html" %}
 {% load crispy_forms_filters %}
 
 {% block content %}
@@ -9,13 +9,16 @@
         {% csrf_token %}
         <div class="card">
           <div class="card-header">
-            <h4 class="card-title">Form Title</h4>
+            <h4 class="card-title">Registration Form</h4>
           </div>
           <div class="card-body">
             {{ form|crispy }}
           </div>
           <div class="card-footer">
             <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+          <div class="card-footer">
+            <button class="btn btn-primary"><a href="{% url 'login' %}">Back to login page</a></button>
           </div>
         </div>
       </form>

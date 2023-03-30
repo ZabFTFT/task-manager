@@ -36,7 +36,10 @@
               <td>{{ task.priority }}</td>
               <td><a href="{% url 'tasks:task-delete' task.id%}">Delete</a></td>
             </tr>
+            <tr>
+            </tr>
           {% endfor %}
+              <button class="btn btn-primary" onclick="window.location.href='{% url 'tasks:create-task' %}'">Add task</button>
         </tbody>
       </table>
     </div>

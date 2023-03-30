@@ -11,16 +11,21 @@ class TasksViewsTestCase(TestCase):
         super().setUpClass()
         cls.client = Client()
         cls.user = get_user_model().objects.create_user(
-            username="testuser", password="testpass", position=Position.objects.create(name="Some")
+            username="testuser",
+            password="testpass",
+            position=Position.objects.create(name="Some"),
         )
-        cls.worker = Worker.objects.create(first_name="John", last_name="Doe", position=Position.objects.create(name="Some")
+        cls.worker = Worker.objects.create(
+            first_name="John",
+            last_name="Doe",
+            position=Position.objects.create(name="Some"),
         )
         cls.task = Task.objects.create(
             name="Test Task",
             description="This is a test task",
             deadline="2023-04-01T12:00",
             priority="medium",
-            task_type=TaskType.objects.create(name="QA")
+            task_type=TaskType.objects.create(name="QA"),
         )
         cls.task.assignees.set([cls.user])
 

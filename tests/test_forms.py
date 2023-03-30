@@ -1,8 +1,8 @@
 from django.test import TestCase
 from django.utils import timezone
 
-from tasks.forms import CreateTaskForm, CreateWorkerForm
-from tasks.models import Task, TaskType, Worker, Position
+from tasks.forms import CreateTaskForm
+from tasks.models import TaskType, Worker, Position
 
 
 class CreateTaskFormTest(TestCase):

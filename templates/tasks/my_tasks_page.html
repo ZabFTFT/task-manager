@@ -57,7 +57,7 @@
             {% for task in in_progress_tasks %}
               <tr>
                 <td class="text-center">{{ task.name }}</td>
-                <td class="text-center">{{ task.description }}</td>
+                <td class="text-center text-truncate description">{{ task.description }}</td>
                 <td class="text-center">{{ task.deadline }}</td>
                 <td class="text-center {% if task.priority == 'C' %}text-danger font-weight-bold{% elif task.priority == 'H' %}text-warning{% else %}text-secondary{% endif %}">
                   {{ task.priority }}

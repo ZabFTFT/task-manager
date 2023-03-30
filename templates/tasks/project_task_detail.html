@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-8 mx-auto">
-        <h3 class="my-4">{{ project_task.name }}</h3>
+        <h3 class="text-center my-4">{{ project_task.name }}</h3>
         <table class="table table-striped">
           <tbody>
             <tr>
@@ -29,7 +29,7 @@
             </tr>
             <tr>
               <th scope="row">Priority</th>
-              <td>{{ project_task.priority}}</td>
+              <td class="{% if project_task.priority == 'C' %}text-danger{% elif project_task.priority == 'H' %}text-warning{% endif %}">{{ project_task.priority }}</td>
             </tr>
             <tr>
               <th scope="row">Participants</th>
@@ -46,7 +46,7 @@
           </tbody>
         </table>
         <div class="row justify-content-center">
-          <button class="btn btn-primary" onclick="window.history.back()">Previous page</button>
+          <a href="javascript:history.back()" class="btn btn-info">Previous Page</a>
         </div>
       </div>
     </div>

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 mx-auto">
+        <h3 class="text-center my-4">{{ project_task.name }}</h3>
+        <table class="table table-striped">
+          <tbody>
+            <tr>
+              <th scope="row">Task ID</th>
+              <td>{{ project_task.id }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Task name</th>
+              <td>{{ project_task.name }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Task description</th>
+              <td>{{ project_task.description }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Task type</th>
+              <td>{{ project_task.task_type }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Task deadline</th>
+              <td>{{ project_task.deadline }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Priority</th>
+              <td class="{% if project_task.priority == 'C' %}text-danger{% elif project_task.priority == 'H' %}text-warning{% endif %}">{{ project_task.priority }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Participants</th>
+              <td>
+                {% for participant in participants %}
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div class="me-3">
+                      {{ participant.first_name }} {{ participant.last_name }}
+                    </div>
+                  </div>
+                {% endfor %}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row justify-content-center">
+          <a href="javascript:history.back()" class="btn btn-info">Previous Page</a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

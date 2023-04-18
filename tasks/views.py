@@ -60,7 +60,7 @@ class ProjectTaskListFinishedView(LoginRequiredMixin, generic.ListView):
             .distinct()
         )
         context["finished_tasks"] = finished_tasks
-        context["participants"] = participants  
+        context["participants"] = participants
         return context
 
 

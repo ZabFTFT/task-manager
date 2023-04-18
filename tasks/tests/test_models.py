@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.utils import timezone
 from datetime import timedelta
 
-from tasks.models import Task, TaskType, Position
+from tasks.models import Task, TaskType, Position, Worker
 
 
 class TaskModelTestCase(TestCase):
@@ -50,3 +50,28 @@ class TaskModelTestCase(TestCase):
         )
         self.task.assignees.set([user1, user2])
         self.assertEqual(self.task.assignees.count(), 2)
+
+
+class PositionTestCase(TestCase):
+    def test_str_representation(self):
+        position = Position.objects.create(name="Manager")
+        self.assertEqual(str(position), "Manager")
+
+
+class TaskTypeTestCase(TestCase):
+    def test_str_representation(self):
+        task_type = TaskType.objects.create(name="QA")
+        self.assertEqual(str(task_type), "QA")
+
+
+class WorkerTestCase(TestCase):
+    def test_str_representation(self):
+        position = Position.objects.create(name="Developer")
+        user = Worker.objects.create_user(
+            username="testuser",
+            password="testpass",
+            first_name="John",
+            last_name="Doe",
+            position=position,
+        )
+        self.assertEqual(str(user), "John Doe Developer")

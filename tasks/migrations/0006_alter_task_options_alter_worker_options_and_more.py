@@ -12,7 +12,10 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name="task",
-            options={"default_related_name": "tasks", "ordering": ["deadline"]},
+            options={
+                "default_related_name": "tasks",
+                "ordering": ["deadline"],
+            },
         ),
         migrations.AlterModelOptions(
             name="worker",

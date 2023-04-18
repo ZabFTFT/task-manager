@@ -21,7 +21,12 @@ Python3 must be already installed
 git clone https://github.com/ZabFTFT/task-manager.git
 cd task-manager
 python -m venv venv
-source venv/Scripts/activate
+```
+```shell
+venv\Scripts\activate (on Windows)
+source venv/bin/activate (on macOS)
+```
+```shell
 pip install -r requirements.txt
 python manage.py runserver # starts Django server
 ```
@@ -34,5 +39,5 @@ python manage.py runserver # starts Django server
 
 ## Demo
 
-![img.png](img.png)
-![img_1.png](img_1.png)
+![img.png](demo/img.png)
+![img_1.png](demo/img_1.png)

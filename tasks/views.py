@@ -60,7 +60,7 @@ class ProjectTaskListFinishedView(LoginRequiredMixin, generic.ListView):
             .distinct()
         )
         context["finished_tasks"] = finished_tasks
-        context["participants"] = participants
+        context["participants"] = participants  
         return context
 
 
@@ -94,7 +94,7 @@ class ProjectTaskDetailView(LoginRequiredMixin, generic.DetailView):
         return context
 
 
-class CreateWorkerView(LoginRequiredMixin, generic.CreateView):
+class CreateWorkerView(generic.CreateView):
     form_class = CreateWorkerForm
     template_name = "tasks/create_worker.html"
     success_url = reverse_lazy("login")

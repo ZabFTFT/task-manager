@@ -39,5 +39,6 @@ python manage.py runserver # starts Django server
 
 ## Demo
 
-![img.png](demo/img.png)
+![img.png](demo/7de97fa1e8afd4e3dcb1080a1035580a.png)
 ![img_1.png](demo/img_1.png)
+![img_2.png](demo/da1af8f7912eebe14ba90d64dd2a159e.png)
